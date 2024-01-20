@@ -1,6 +1,7 @@
 package de.peettea.minecraft.menuApi.core;
 
 import lombok.Getter;
+import org.bukkit.plugin.Plugin;
 
 public abstract class PaginatedMenu extends Menu {
 
@@ -22,7 +23,7 @@ public abstract class PaginatedMenu extends Menu {
      */
     protected int index = 0;
 
-    public PaginatedMenu(PlayerMenuUtility playerMenuUtility) {
-        super(playerMenuUtility);
+    public PaginatedMenu(PlayerMenuUtility playerMenuUtility, Plugin plugin) {
+        super(playerMenuUtility, plugin);
     }
 }

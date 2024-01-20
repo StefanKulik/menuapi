@@ -3,7 +3,6 @@ package de.peettea.minecraft.menuApi.core;
 import de.peettea.minecraft.menuApi.core.item.BasicItem;
 import de.peettea.minecraft.menuApi.core.item.Item;
 import de.peettea.minecraft.menuApi.core.item.ItemBuilder;
-import de.peettea.minecraft.minigames.PluginMain;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.bukkit.Bukkit;
@@ -14,6 +13,7 @@ import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
@@ -30,8 +30,11 @@ public abstract class Menu implements InventoryHolder {
     @Getter
     protected boolean sticky = false;
 
-    public Menu(PlayerMenuUtility playerMenuUtility) {
+    private final Plugin plugin;
+
+    public Menu(PlayerMenuUtility playerMenuUtility, Plugin plugin) {
         this.playerMenuUtility = playerMenuUtility;
+        this.plugin = plugin;
     }
 
     protected abstract String getMenuName();
@@ -129,8 +132,8 @@ public abstract class Menu implements InventoryHolder {
     /**
      * @return the plugin instance of this project
      */
-    protected PluginMain getPlugin() {
-        return PluginMain.getInstance();
+    protected Plugin getPlugin() {
+        return plugin;
     }
 
     /**
