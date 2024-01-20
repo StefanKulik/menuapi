@@ -5,6 +5,7 @@ import de.peettea.minecraft.menuApi.core.PlayerMenuUtility;
 import de.peettea.minecraft.menuApi.exceptions.MenuManagerException;
 import de.peettea.minecraft.menuApi.exceptions.MenuManagerNotSetupException;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -20,9 +21,9 @@ public class MenuManager {
         return playerMenuUtilityMap.get(player);
     }
 
-    public static Menu buildMenu(Class<? extends Menu> menuClass, Player player) throws MenuManagerException, MenuManagerNotSetupException {
+    public static Menu buildMenu(Class<? extends Menu> menuClass, Player player, Plugin plugin) throws MenuManagerException, MenuManagerNotSetupException {
         try {
-            return menuClass.getConstructor(PlayerMenuUtility.class).newInstance(getPlayerMenuUtility(player));
+            return menuClass.getConstructor(PlayerMenuUtility.class, Plugin.class).newInstance(getPlayerMenuUtility(player), plugin);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                  NoSuchMethodException e) {
             throw new MenuManagerException();
